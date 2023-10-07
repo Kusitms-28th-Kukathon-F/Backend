@@ -9,6 +9,7 @@ import kusitms.server.domain.department.repository.DepartmentRepository;
 import kusitms.server.domain.tumbler.history.dto.response.HistoryMonthDetailResponseDto;
 import kusitms.server.domain.tumbler.history.entity.TumblerHistory;
 import kusitms.server.domain.tumbler.history.repository.TumblerHistoryRepository;
+import kusitms.server.domain.tumbler.history.util.ListComparator;
 import kusitms.server.domain.user.entity.User;
 import kusitms.server.domain.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -19,6 +20,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import static kusitms.server.domain.common.error.ApplicationError.DEPARTMENT_NOT_FOUND;
@@ -39,7 +41,7 @@ public class TumblerHistoryService {
         User finduser = getUserById(userId);
         Department userDepartment = getDepartmentByUser(finduser);
         Company company = userDepartment.getCompany();
-        List<Department> departments = departmentRepository.findAllByCompany(company);
+        List<Department> departments = company.getDepartments();
         List<HistoryMonthDetailResponseDto> response = new ArrayList<>();
         LocalDateTime startMonthDate = createStartMonthDate(period);
         LocalDateTime endMonthDate = createEndMonthDate(period);
@@ -48,6 +50,8 @@ public class TumblerHistoryService {
                         HistoryMonthDetailResponseDto.of(findHistoryInPeriod(startMonthDate, endMonthDate, department))
                 )
         );
+        response.sort(new ListComparator());
+
         return response;
     }
 
@@ -77,7 +81,7 @@ public class TumblerHistoryService {
     }
 
     private TumblerHistory findHistoryInPeriod(LocalDateTime searchStartDate, LocalDateTime searchEndDate, Department department) {
-        TumblerHistory tumblerHistory = tumblerHistoryRepository.findByCreatedAtBetweenAndDepartmentOrderByTumblerPercentDesc(searchStartDate, searchEndDate, department);
+        TumblerHistory tumblerHistory = tumblerHistoryRepository.findByCreatedAtBetweenAndDepartment(searchStartDate, searchEndDate, department);
         return tumblerHistory;
     }
 

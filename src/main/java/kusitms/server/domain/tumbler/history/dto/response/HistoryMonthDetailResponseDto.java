@@ -10,7 +10,7 @@ public class HistoryMonthDetailResponseDto {
 
     private String tumblerName;
 
-    private String departmentName;
+    private String deptName;
 
     private Integer tumblerGrade;
 
@@ -21,10 +21,10 @@ public class HistoryMonthDetailResponseDto {
     public static HistoryMonthDetailResponseDto of(TumblerHistory tumblerHistory) {
         return HistoryMonthDetailResponseDto.builder()
                 .tumblerName(tumblerHistory.getTumblerName())
-                .departmentName(tumblerHistory.getDepartment().getDeptName())
+                .deptName(tumblerHistory.getDepartment().getDeptName())
                 .tumblerGrade(tumblerHistory.getTumblerGrade())
                 .tumblerPercent(tumblerHistory.getTumblerPercent())
-                .tumblerCount(builder().tumblerCount)
+                .tumblerCount(tumblerHistory.getTumblerCount())
                 .build();
     }
 }
