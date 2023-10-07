@@ -12,4 +12,6 @@ public interface DepartmentRepository extends JpaRepository<Department, Long> {
     Optional<Department> findByUser(User user);
 
     List<Department> findAllByCompany(Company company);
+
+    Department findByUserId(Long userId);
 }
