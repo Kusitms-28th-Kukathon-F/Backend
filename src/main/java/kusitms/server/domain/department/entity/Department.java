@@ -2,6 +2,7 @@ package kusitms.server.domain.department.entity;
 
 import jakarta.persistence.*;
 import kusitms.server.domain.company.entity.Company;
+import kusitms.server.domain.tumbler.current.entity.TumblerCurrent;
 import kusitms.server.domain.user.entity.User;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -11,7 +12,7 @@ import static jakarta.persistence.FetchType.LAZY;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Table(name = "Department")
+@Table(name = "DEPARTMENT")
 @Entity
 public class Department {
 
@@ -33,5 +34,8 @@ public class Department {
 
     @Column(name = "member_count", nullable = false)
     private Integer memberCount; // 부서 사원 수
+
+    @OneToOne(mappedBy = "department", cascade = CascadeType.ALL, orphanRemoval = true)
+    private TumblerCurrent tumblerCurrent;
 
 }
