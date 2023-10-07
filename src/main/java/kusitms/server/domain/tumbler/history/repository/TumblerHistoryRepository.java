@@ -11,6 +11,8 @@ public interface TumblerHistoryRepository extends JpaRepository<TumblerHistory, 
 
     TumblerHistory findByCreatedAtBetweenAndDepartment(LocalDateTime searchStartDate, LocalDateTime searchEndDate, Department department);
 
+    List<TumblerHistory> findAllByCreatedAtBetweenAndDepartment(LocalDateTime searchStartDate, LocalDateTime searchEndDate, Department department);
+
     List<TumblerHistory> findAllByCreatedAtBetween(LocalDateTime searchStartDate, LocalDateTime searchEndDate);
     List<TumblerHistory> findAllByDepartmentOrderByCreatedAtDesc(Department departcafement);
 }

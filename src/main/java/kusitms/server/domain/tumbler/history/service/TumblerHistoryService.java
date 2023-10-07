@@ -1,15 +1,16 @@
 package kusitms.server.domain.tumbler.history.service;
 
-import kusitms.server.domain.common.error.ApplicationError;
 import kusitms.server.domain.common.error.NotFoundException;
 import kusitms.server.domain.company.entity.Company;
 import kusitms.server.domain.company.repository.CompanyRepository;
 import kusitms.server.domain.department.entity.Department;
 import kusitms.server.domain.department.repository.DepartmentRepository;
 import kusitms.server.domain.tumbler.history.dto.response.HistoryMonthDetailResponseDto;
+import kusitms.server.domain.tumbler.history.dto.response.HistoryQuarterDetailResponseDto;
 import kusitms.server.domain.tumbler.history.entity.TumblerHistory;
 import kusitms.server.domain.tumbler.history.repository.TumblerHistoryRepository;
-import kusitms.server.domain.tumbler.history.util.ListComparator;
+import kusitms.server.domain.tumbler.history.util.ListComparatorMonth;
+import kusitms.server.domain.tumbler.history.util.ListComparatorQuarter;
 import kusitms.server.domain.user.entity.User;
 import kusitms.server.domain.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -20,7 +21,6 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import static kusitms.server.domain.common.error.ApplicationError.DEPARTMENT_NOT_FOUND;
@@ -47,14 +47,31 @@ public class TumblerHistoryService {
         LocalDateTime endMonthDate = createEndMonthDate(period);
         departments.forEach(department ->
                 response.add(
-                        HistoryMonthDetailResponseDto.of(findHistoryInPeriod(startMonthDate, endMonthDate, department))
+                        HistoryMonthDetailResponseDto.of(findHistoryInMonth(startMonthDate, endMonthDate, department))
                 )
         );
-        response.sort(new ListComparator());
+        response.sort(new ListComparatorMonth());
 
         return response;
     }
 
+
+    public List<HistoryQuarterDetailResponseDto> findDetailByQuarter(String startPeriod, String endPeriod, Long userId) {
+        User finduser = getUserById(userId);
+        Department userDepartment = getDepartmentByUser(finduser);
+        Company company = userDepartment.getCompany();
+        List<Department> departments = company.getDepartments();
+        List<HistoryQuarterDetailResponseDto> response = new ArrayList<>();
+        LocalDateTime startMonthDate = createStartMonthDate(startPeriod);
+        LocalDateTime endMonthDate = createEndMonthDate(endPeriod);
+        departments.forEach(department ->
+                response.add(
+                        HistoryQuarterDetailResponseDto.of(findHistoryInQuarter(startMonthDate, endMonthDate, department))
+                )
+        );
+        response.sort(new ListComparatorQuarter());
+        return response;
+    }
 
     // 월별 검색을 할때 1일 0시0분0초 값을 추가 해줘서 범위의 처음 값을 만듭니다.
     private LocalDateTime createStartMonthDate(String period) {
@@ -80,9 +97,14 @@ public class TumblerHistoryService {
                 .orElseThrow(() -> new NotFoundException(DEPARTMENT_NOT_FOUND));
     }
 
-    private TumblerHistory findHistoryInPeriod(LocalDateTime searchStartDate, LocalDateTime searchEndDate, Department department) {
+    private TumblerHistory findHistoryInMonth(LocalDateTime searchStartDate, LocalDateTime searchEndDate, Department department) {
         TumblerHistory tumblerHistory = tumblerHistoryRepository.findByCreatedAtBetweenAndDepartment(searchStartDate, searchEndDate, department);
         return tumblerHistory;
+    }
+
+    private List<TumblerHistory> findHistoryInQuarter(LocalDateTime searchStartDate, LocalDateTime searchEndDate, Department department) {
+        List<TumblerHistory> tumblerHistories = tumblerHistoryRepository.findAllByCreatedAtBetweenAndDepartment(searchStartDate, searchEndDate, department);
+        return tumblerHistories;
     }
 
 }
