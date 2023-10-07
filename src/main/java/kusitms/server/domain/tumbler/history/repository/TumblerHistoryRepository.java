@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface TumblerHistoryRepository extends JpaRepository<TumblerHistory, Long> {
 
-    TumblerHistory findByCreatedAtBetweenAndDepartmentOrderByTumblerPercentDesc(LocalDateTime searchStartDate, LocalDateTime searchEndDate, Department department);
+    TumblerHistory findByCreatedAtBetweenAndDepartment(LocalDateTime searchStartDate, LocalDateTime searchEndDate, Department department);
 
     List<TumblerHistory> findAllByCreatedAtBetween(LocalDateTime searchStartDate, LocalDateTime searchEndDate);
     List<TumblerHistory> findAllByDepartmentOrderByCreatedAtDesc(Department departcafement);
