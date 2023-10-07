@@ -2,22 +2,17 @@ package kusitms.server.domain.cafe.dto.response;
 
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
-@Builder
+@NoArgsConstructor
 @Getter
 public class UpdateTeamTumblerResponseDto {
 
-    private Long teamId;
+    private String deptName; // 부서 이름
 
-    private String teamName;
 
-    private Long totalTumblerNumber;
-
-    public static UpdateTeamTumblerResponseDto of(Long teamId, String teamName, Long totalTumblerNumber) {
-        return UpdateTeamTumblerResponseDto.builder()
-                .teamId(teamId)
-                .teamName(teamName)
-                .totalTumblerNumber(totalTumblerNumber)
-                .build();
+    @Builder
+    public UpdateTeamTumblerResponseDto(String deptName) {
+        this.deptName = deptName;
     }
 }
