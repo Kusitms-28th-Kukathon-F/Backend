@@ -3,6 +3,7 @@ package kusitms.server.domain.cafe.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import kusitms.server.domain.cafe.dto.request.UpdateTeamTumblerRequestDto;
 import kusitms.server.domain.cafe.dto.response.UpdateTeamTumblerResponseDto;
 import kusitms.server.domain.cafe.service.CafeService;
@@ -12,6 +13,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+@Tag(name = "카페 텀블러 API", description = "유저 로그인 API")
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/cafes")
