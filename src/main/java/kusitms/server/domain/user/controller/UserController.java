@@ -22,7 +22,7 @@ public class UserController {
 
     private final UserService userService;
 
-    @Operation(description = "유저 로그인", summary = "유저 로그인 하기")
+    @Operation(summary = "유저 로그인 API", description = "유저 로그인 하기")
     @ApiResponse(responseCode = "200", description = "OK",
             content = @Content(schema = @Schema(implementation = LoginResponseDto.class)))
     @PostMapping("")
