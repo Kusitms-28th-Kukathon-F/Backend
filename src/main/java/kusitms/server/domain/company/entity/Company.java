@@ -1,6 +1,7 @@
 package kusitms.server.domain.company.entity;
 
 import jakarta.persistence.*;
+import kusitms.server.domain.department.entity.Department;
 import kusitms.server.domain.user.entity.User;
 import lombok.*;
 
@@ -25,5 +26,8 @@ public class Company {
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
+
+    @OneToOne(mappedBy = "company", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Department department;
 
 }
