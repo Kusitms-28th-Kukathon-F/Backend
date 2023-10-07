@@ -7,6 +7,7 @@ import kusitms.server.domain.department.entity.Department;
 import kusitms.server.domain.department.repository.DepartmentRepository;
 import kusitms.server.domain.tumbler.history.dto.response.HistoryMonthDetailResponseDto;
 import kusitms.server.domain.tumbler.history.dto.response.HistoryQuarterDetailResponseDto;
+import kusitms.server.domain.tumbler.history.dto.response.HistoryRankResponseDto;
 import kusitms.server.domain.tumbler.history.entity.TumblerHistory;
 import kusitms.server.domain.tumbler.history.repository.TumblerHistoryRepository;
 import kusitms.server.domain.tumbler.history.util.ListComparatorMonth;
@@ -66,10 +67,29 @@ public class TumblerHistoryService {
         LocalDateTime endMonthDate = createEndMonthDate(endPeriod);
         departments.forEach(department ->
                 response.add(
-                        HistoryQuarterDetailResponseDto.of(findHistoryInQuarter(startMonthDate, endMonthDate, department))
+                        HistoryQuarterDetailResponseDto.of(findHistoryInPeriod(startMonthDate, endMonthDate, department))
                 )
         );
         response.sort(new ListComparatorQuarter());
+        return response;
+    }
+
+
+
+    // 근 3달간의 랭킹을 봐봅시다..
+    public List<HistoryRankResponseDto> findHistoryRank(String period, Long userId) {
+        User finduser = getUserById(userId);
+        Department userDepartment = getDepartmentByUser(finduser);
+        Company company = userDepartment.getCompany();
+        List<Department> departments = company.getDepartments();
+        List<HistoryRankResponseDto> response = new ArrayList<>();
+        LocalDateTime startMonthDate = createStartMonthDate(period);
+        LocalDateTime endMonthDate = createEndMonthDate(period);
+        for (int i = 0; i < 3; i++) {
+            response.add(
+                    HistoryRankResponseDto.of(findAllHistoryInPeriod(startMonthDate.minusMonths(i), endMonthDate.minusMonths(i)), userDepartment.getDeptName())
+            );
+        }
         return response;
     }
 
@@ -102,8 +122,13 @@ public class TumblerHistoryService {
         return tumblerHistory;
     }
 
-    private List<TumblerHistory> findHistoryInQuarter(LocalDateTime searchStartDate, LocalDateTime searchEndDate, Department department) {
+    private List<TumblerHistory> findHistoryInPeriod(LocalDateTime searchStartDate, LocalDateTime searchEndDate, Department department) {
         List<TumblerHistory> tumblerHistories = tumblerHistoryRepository.findAllByCreatedAtBetweenAndDepartment(searchStartDate, searchEndDate, department);
+        return tumblerHistories;
+    }
+
+    private List<TumblerHistory> findAllHistoryInPeriod(LocalDateTime searchStartDate, LocalDateTime searchEndDate) {
+        List<TumblerHistory> tumblerHistories = tumblerHistoryRepository.findAllByCreatedAtBetweenOrderByTumblerCountDesc(searchStartDate, searchEndDate);
         return tumblerHistories;
     }
 
