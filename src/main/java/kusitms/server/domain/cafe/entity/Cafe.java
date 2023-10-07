@@ -23,10 +23,10 @@ public class Cafe {
     private String cafeName;
 
     @Column(name="latitude")
-    private Long latitude;
+    private Double latitude;
 
     @Column(name="longitude")
-    private Long longitude;
+    private Double longitude;
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
