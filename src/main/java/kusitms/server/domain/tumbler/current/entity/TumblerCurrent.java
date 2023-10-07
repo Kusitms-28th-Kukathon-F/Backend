@@ -49,4 +49,10 @@ public class TumblerCurrent {
         this.tumblerPercent = tumblerPercent;
         this.tumblerGrade = tumblerGrade;
     }
+
+    public void updateTumblerCount() {
+        this.tumblerCount += 8;
+        this.tumblerGrade = (tumblerCount / 64) + 1;
+        this.tumblerPercent = (double) ((tumblerCount % 64) / 64.0) * 100;
+    }
 }

@@ -6,12 +6,15 @@ import kusitms.server.domain.tumbler.current.dto.response.MainResponseDto;
 import kusitms.server.domain.tumbler.current.entity.TumblerCurrent;
 import kusitms.server.domain.tumbler.current.repository.TumblerCurrentRepository;
 import kusitms.server.domain.tumbler.history.dto.response.HistoryMonthDetailResponseDto;
+import kusitms.server.domain.tumbler.history.entity.TumblerHistory;
+import kusitms.server.domain.tumbler.history.repository.TumblerHistoryRepository;
 import kusitms.server.domain.tumbler.history.service.TumblerHistoryService;
+import kusitms.server.domain.user.entity.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -21,11 +24,10 @@ public class TumblerCurrentService {
 
     private final DepartmentRepository departmentRepository;
     private final TumblerCurrentRepository tumblerCurrentRepository;
+    private final TumblerHistoryRepository tumblerHistoryRepository;
     private final TumblerHistoryService tumblerHistoryService;
 
     public MainResponseDto getTumblerCurrent(Long userId) {
-
-//        Long userId = mainRequestDto.getUserId();
 
         Department department = departmentRepository.findByUserId(userId);
         Long deptId = department.getId(); // 부서 id
@@ -51,8 +53,23 @@ public class TumblerCurrentService {
                 .build();
 
         return res;
-
     }
 
-
+//    public void addTumblerCurrent(Long userId) {
+//
+//        User finduser = tumblerHistoryService.getUserById(userId);
+//        Department department = tumblerHistoryService.getDepartmentByUser(finduser);
+//        Long deptId = department.getId(); // 부서 id
+//
+//        TumblerCurrent tumblerCurrent = tumblerCurrentRepository.findByDepartment(department);
+//        tumblerCurrent.updateTumblerCount();
+//
+//        LocalDateTime now = LocalDateTime.now();
+//        TumblerHistory tumblerHistory = tumblerHistoryRepository.findByCreatedAtBetweenAndDepartment
+//                (tumblerHistoryService.createStartMonthDate("202310"),
+//                        tumblerHistoryService.createEndMonthDate("202310"),
+//                        department);
+//        tumblerHistory.updateTumblerCount();
+//
+//    }
 }
