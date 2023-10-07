@@ -10,8 +10,8 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
-                .allowedOriginPatterns("https://kusitms.shop/swagger-ui/**")
-                .allowedOrigins("http://localhost:5173")
+//                .allowedOriginPatterns("https://kusitms.shop/swagger-ui/**")
+                .allowedOrigins("http://localhost:5173", "https://kusitms.shop")
                 .allowedMethods("GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS")
                 .allowCredentials(true)
                 .allowedHeaders("*")
