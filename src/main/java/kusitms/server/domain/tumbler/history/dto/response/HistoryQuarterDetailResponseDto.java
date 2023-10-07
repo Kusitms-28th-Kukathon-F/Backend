@@ -18,7 +18,7 @@ public class HistoryQuarterDetailResponseDto {
 
     private Double tumblerPercent;
 
-    private Double tumblerAverage;
+    private Integer tumblerAverage;
 
     public static HistoryQuarterDetailResponseDto of(List<TumblerHistory> tumblerHistories) {
         Double average = (double) 0;
@@ -31,7 +31,7 @@ public class HistoryQuarterDetailResponseDto {
                 .deptName(tumblerHistories.get(0).getDepartment().getDeptName())
                 .tumblerGrade(tumblerHistories.get(0).getTumblerGrade())
                 .tumblerPercent(tumblerHistories.get(0).getTumblerPercent())
-                .tumblerAverage(average)
+                .tumblerAverage((int) Math.floor(average))
                 .build();
     }
 }
