@@ -2,13 +2,17 @@ package kusitms.server.domain.tumbler.current.service;
 
 import kusitms.server.domain.department.entity.Department;
 import kusitms.server.domain.department.repository.DepartmentRepository;
-import kusitms.server.domain.tumbler.current.dto.request.MainRequestDto;
 import kusitms.server.domain.tumbler.current.dto.response.MainResponseDto;
 import kusitms.server.domain.tumbler.current.entity.TumblerCurrent;
 import kusitms.server.domain.tumbler.current.repository.TumblerCurrentRepository;
+import kusitms.server.domain.tumbler.history.dto.response.HistoryMonthDetailResponseDto;
+import kusitms.server.domain.tumbler.history.service.TumblerHistoryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @RequiredArgsConstructor
 @Service
@@ -17,6 +21,7 @@ public class TumblerCurrentService {
 
     private final DepartmentRepository departmentRepository;
     private final TumblerCurrentRepository tumblerCurrentRepository;
+    private final TumblerHistoryService tumblerHistoryService;
 
     public MainResponseDto getTumblerCurrent(Long userId) {
 
@@ -34,12 +39,15 @@ public class TumblerCurrentService {
         Double tumblerPercent = tumblerCurrent.getTumblerPercent(); // 이번달 부서별 텀블러 퍼센트
         Integer tumblerGrade = tumblerCurrent.getTumblerGrade(); // 이번달 부서별 텀블러 등급
 
+        List<HistoryMonthDetailResponseDto> rankList = tumblerHistoryService.findDetailByMonth("202310", userId);
+
         MainResponseDto res = MainResponseDto.builder()
                 .tumblerGrade(tumblerGrade)
                 .tumblerName(tumblerName)
                 .deptName(deptName)
                 .tumblerPercent(tumblerPercent)
                 .toGoalCount(tumblerGoal - tumblerCount)
+                .rankList(rankList)
                 .build();
 
         return res;
