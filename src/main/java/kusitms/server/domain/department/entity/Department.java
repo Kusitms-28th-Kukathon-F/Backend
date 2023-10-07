@@ -3,10 +3,14 @@ package kusitms.server.domain.department.entity;
 import jakarta.persistence.*;
 import kusitms.server.domain.company.entity.Company;
 import kusitms.server.domain.tumbler.current.entity.TumblerCurrent;
+import kusitms.server.domain.tumbler.history.entity.TumblerHistory;
 import kusitms.server.domain.user.entity.User;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static jakarta.persistence.FetchType.LAZY;
 
@@ -38,4 +42,6 @@ public class Department {
     @OneToOne(mappedBy = "department", cascade = CascadeType.ALL, orphanRemoval = true)
     private TumblerCurrent tumblerCurrent;
 
+    @OneToMany(mappedBy = "department", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<TumblerHistory> tumblerHistories = new ArrayList<>();
 }
