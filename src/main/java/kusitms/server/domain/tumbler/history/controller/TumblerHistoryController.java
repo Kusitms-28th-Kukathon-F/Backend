@@ -19,7 +19,7 @@ public class TumblerHistoryController {
     private final TumblerHistoryService tumblerHistoryService;
 
     // ex. 202310 이정도로 달까지만 주세요
-    @GetMapping
+    @GetMapping("/month")
     public ResponseEntity<SuccessResponse<List<HistoryMonthDetailResponseDto>>> findDetailByMonth(@RequestParam String period, @RequestParam Long userId) {
         List<HistoryMonthDetailResponseDto> request = tumblerHistoryService.findDetailByMonth(period, userId);
         return SuccessResponse.of(SuccessCode.OK, request);
