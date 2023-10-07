@@ -30,7 +30,7 @@ public class CafeService {
     private final TumblerCurrentRepository tumblerCurrentRepository;
 
 
-    public void addTumblerCurrent(Long userId) {
+    public UpdateTeamTumblerResponseDto addTumblerCurrent(Long userId) {
 
         User finduser = tumblerHistoryService.getUserById(userId);
         Department department = tumblerHistoryService.getDepartmentByUser(finduser);
@@ -45,6 +45,12 @@ public class CafeService {
                         tumblerHistoryService.createEndMonthDate("202310"),
                         department);
         tumblerHistory.updateTumblerCount();
+
+        UpdateTeamTumblerResponseDto res = UpdateTeamTumblerResponseDto.builder()
+                .deptName(department.getDeptName())
+                .build();
+
+        return res;
 
     }
 }

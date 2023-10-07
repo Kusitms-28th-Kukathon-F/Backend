@@ -24,8 +24,8 @@ public class CafeController {
     @Operation(summary = "부서 텀블러 적립 API", description = "부서 텀블러 적립하기")
     @ApiResponse(responseCode = "200", description = "OK")
     @GetMapping("/{userId}")
-    public ResponseEntity<SuccessResponse> addTumblerCurrent(@PathVariable Long userId) {
-        cafeService.addTumblerCurrent(userId);
-        return SuccessResponse.of(SuccessCode.OK);
+    public ResponseEntity<SuccessResponse<UpdateTeamTumblerResponseDto>> addTumblerCurrent(@PathVariable Long userId) {
+        UpdateTeamTumblerResponseDto response = cafeService.addTumblerCurrent(userId);
+        return SuccessResponse.of(SuccessCode.OK, response);
     }
 }
