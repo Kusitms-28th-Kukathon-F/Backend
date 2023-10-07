@@ -19,7 +19,8 @@
 
 ## 🔍 System Architecture
 
-![image 9](https://github.com/Kusitms-28th-Kukathon-F/Backend/assets/98451999/ad9ef080-a16b-4c9b-bb48-d4ac9f87cddf)
+<img width="6050" alt="arch" src="https://github.com/Kusitms-28th-Kukathon-F/Backend/assets/98451999/1335e057-333d-4656-9161-23311ff51ecc">
+
 
 <br>
 <br>
