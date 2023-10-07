@@ -6,6 +6,7 @@ import kusitms.server.domain.tumbler.current.entity.TumblerCurrent;
 import kusitms.server.domain.tumbler.history.entity.TumblerHistory;
 import kusitms.server.domain.user.entity.User;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -44,4 +45,15 @@ public class Department {
 
     @OneToMany(mappedBy = "department", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<TumblerHistory> tumblerHistories = new ArrayList<>();
+
+    @Builder
+    public Department(Long id, User user, Company company, String deptName, Integer memberCount, TumblerCurrent tumblerCurrent, List<TumblerHistory> tumblerHistories) {
+        this.id = id;
+        this.user = user;
+        this.company = company;
+        this.deptName = deptName;
+        this.memberCount = memberCount;
+        this.tumblerCurrent = tumblerCurrent;
+        this.tumblerHistories = tumblerHistories;
+    }
 }
