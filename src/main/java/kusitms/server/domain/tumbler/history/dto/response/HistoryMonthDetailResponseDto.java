@@ -14,7 +14,7 @@ public class HistoryMonthDetailResponseDto {
 
     private Integer tumblerGrade;
 
-    private Double tumblerPercent;
+    private Integer tumblerPercent;
 
     private Integer tumblerCount;
 
@@ -23,7 +23,7 @@ public class HistoryMonthDetailResponseDto {
                 .tumblerName(tumblerHistory.getTumblerName())
                 .deptName(tumblerHistory.getDepartment().getDeptName())
                 .tumblerGrade(tumblerHistory.getTumblerGrade())
-                .tumblerPercent(tumblerHistory.getTumblerPercent())
+                .tumblerPercent((int) Math.floor(tumblerHistory.getTumblerPercent()))
                 .tumblerCount(tumblerHistory.getTumblerCount())
                 .build();
     }
