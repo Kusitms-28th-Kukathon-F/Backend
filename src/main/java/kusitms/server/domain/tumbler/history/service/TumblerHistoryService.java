@@ -5,6 +5,7 @@ import kusitms.server.domain.company.entity.Company;
 import kusitms.server.domain.company.repository.CompanyRepository;
 import kusitms.server.domain.department.entity.Department;
 import kusitms.server.domain.department.repository.DepartmentRepository;
+import kusitms.server.domain.tumbler.history.dto.response.HistoryBoardGraphResponseDto;
 import kusitms.server.domain.tumbler.history.dto.response.HistoryMonthDetailResponseDto;
 import kusitms.server.domain.tumbler.history.dto.response.HistoryQuarterDetailResponseDto;
 import kusitms.server.domain.tumbler.history.dto.response.HistoryRankResponseDto;
@@ -89,6 +90,23 @@ public class TumblerHistoryService {
                     HistoryRankResponseDto.of(findAllHistoryInPeriod(startMonthDate.minusMonths(i), endMonthDate.minusMonths(i)), userDepartment.getDeptName())
             );
         }
+        return response;
+    }
+
+
+    public List<HistoryBoardGraphResponseDto> findHistoryGraph(String period, Long userId) {
+        User finduser = getUserById(userId);
+        Department userDepartment = getDepartmentByUser(finduser);
+
+        List<HistoryBoardGraphResponseDto> response = new ArrayList<>();
+        LocalDateTime startMonthDate = createStartMonthDate(period).minusMonths(5);
+        LocalDateTime endMonthDate = createEndMonthDate(period);
+        List<TumblerHistory> tumblerHistories = findHistoryInPeriod(startMonthDate, endMonthDate, userDepartment);
+        tumblerHistories.forEach(history ->
+                response.add(
+                        HistoryBoardGraphResponseDto.of(history)
+                )
+        );
         return response;
     }
 

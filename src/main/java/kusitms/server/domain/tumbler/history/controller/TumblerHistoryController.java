@@ -3,6 +3,7 @@ package kusitms.server.domain.tumbler.history.controller;
 
 import kusitms.server.domain.common.dto.SuccessResponse;
 import kusitms.server.domain.common.dto.code.SuccessCode;
+import kusitms.server.domain.tumbler.history.dto.response.HistoryBoardGraphResponseDto;
 import kusitms.server.domain.tumbler.history.dto.response.HistoryMonthDetailResponseDto;
 import kusitms.server.domain.tumbler.history.dto.response.HistoryQuarterDetailResponseDto;
 import kusitms.server.domain.tumbler.history.dto.response.HistoryRankResponseDto;
@@ -36,6 +37,12 @@ public class TumblerHistoryController {
     @GetMapping("/rank/{userId}")
     public ResponseEntity<SuccessResponse<List<HistoryRankResponseDto>>> findHistoryRank(@RequestParam String period, @PathVariable Long userId) {
         List<HistoryRankResponseDto> request = tumblerHistoryService.findHistoryRank(period, userId);
+        return SuccessResponse.of(SuccessCode.OK, request);
+    }
+
+    @GetMapping("/graph/{userId}")
+    public ResponseEntity<SuccessResponse<List<HistoryBoardGraphResponseDto>>> findHistoryGraph(@RequestParam String period, @PathVariable Long userId) {
+        List<HistoryBoardGraphResponseDto> request = tumblerHistoryService.findHistoryGraph(period, userId);
         return SuccessResponse.of(SuccessCode.OK, request);
     }
 }
