@@ -74,25 +74,25 @@ public class TumblerHistoryService {
     }
 
     // 월별 검색을 할때 1일 0시0분0초 값을 추가 해줘서 범위의 처음 값을 만듭니다.
-    private LocalDateTime createStartMonthDate(String period) {
+    public LocalDateTime createStartMonthDate(String period) {
         period += "01";
         LocalDateTime startDateTime = LocalDate.parse(period, DateTimeFormatter.ofPattern("yyyyMMdd")).atTime(0,0,0);
         return startDateTime;
     }
 
     // 월별 검색을 할때 31일 23시59분59초 값을 추가 해줘서 범위의 마지막 값을 만듭니다.
-    private LocalDateTime createEndMonthDate(String period) {
+    public LocalDateTime createEndMonthDate(String period) {
         period += "31";
         LocalDateTime endDateTime = LocalDate.parse(period, DateTimeFormatter.ofPattern("yyyyMMdd")).atTime(23,59,59);
         return endDateTime;
     }
 
-    private User getUserById(Long userId) {
+    public User getUserById(Long userId) {
         return userRepository.findById(userId)
                 .orElseThrow(() -> new NotFoundException(USER_NOT_FOUND));
     }
 
-    private Department getDepartmentByUser(User user) {
+    public Department getDepartmentByUser(User user) {
         return departmentRepository.findByUser(user)
                 .orElseThrow(() -> new NotFoundException(DEPARTMENT_NOT_FOUND));
     }

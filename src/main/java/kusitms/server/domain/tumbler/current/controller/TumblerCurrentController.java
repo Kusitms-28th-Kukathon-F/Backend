@@ -7,7 +7,6 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import kusitms.server.domain.common.dto.SuccessResponse;
 import kusitms.server.domain.common.dto.code.SuccessCode;
-import kusitms.server.domain.tumbler.current.dto.request.MainRequestDto;
 import kusitms.server.domain.tumbler.current.dto.response.MainResponseDto;
 import kusitms.server.domain.tumbler.current.service.TumblerCurrentService;
 import lombok.RequiredArgsConstructor;
@@ -30,4 +29,13 @@ public class TumblerCurrentController {
         MainResponseDto response = tumblerCurrentService.getTumblerCurrent(userId);
         return SuccessResponse.of(SuccessCode.OK, response);
     }
+
+//    @Operation(summary = "부서 텀블러 적립 API", description = "부서 텀블러 적립하기")
+//    @ApiResponse(responseCode = "200", description = "OK")
+//    @GetMapping("/{userId}")
+//    public ResponseEntity<SuccessResponse> addTumblerCurrent(@PathVariable Long userId) {
+//        tumblerCurrentService.addTumblerCurrent(userId);
+//        return SuccessResponse.of(SuccessCode.OK);
+//    }
+
 }
