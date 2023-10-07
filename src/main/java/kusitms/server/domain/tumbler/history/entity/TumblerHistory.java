@@ -16,7 +16,6 @@ import static jakarta.persistence.FetchType.LAZY;
 @Table(name = "TUMBLER_HISTORY")
 @Entity
 public class TumblerHistory {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "tumbler_his_id")

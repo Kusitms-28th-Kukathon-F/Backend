@@ -26,7 +26,10 @@ public enum ApplicationError {
     /**
      *  404 Not Found
      */
-
+    ENTITY_NOT_FOUND(HttpStatus.NOT_FOUND, "존재하지 않는 엔티티 입니다."),
+    USER_NOT_FOUND(HttpStatus.NOT_FOUND, "존재하지 않는 유저 입니다."),
+    DEPARTMENT_NOT_FOUND(HttpStatus.NOT_FOUND, "존재하지 않는 부서 입니다."),
+    COMPANY_NOT_FOUND(HttpStatus.NOT_FOUND, "존재하지 않는 회사 입니다."),
 
     /**
      * 409 Conflict
