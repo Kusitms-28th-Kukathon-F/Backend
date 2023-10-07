@@ -3,6 +3,7 @@ package kusitms.server.domain.user.entity;
 import jakarta.persistence.*;
 import kusitms.server.domain.cafe.entity.Cafe;
 import kusitms.server.domain.company.entity.Company;
+import kusitms.server.domain.department.entity.Department;
 import lombok.*;
 
 @Getter
@@ -33,4 +34,7 @@ public class User {
 
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private Company company;
+
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Department department;
 }
