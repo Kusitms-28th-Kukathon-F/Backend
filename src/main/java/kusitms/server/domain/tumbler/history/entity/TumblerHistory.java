@@ -3,6 +3,7 @@ package kusitms.server.domain.tumbler.history.entity;
 import jakarta.persistence.*;
 import kusitms.server.domain.department.entity.Department;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -35,5 +36,19 @@ public class TumblerHistory {
     private Double tumblerPercent; // 월별 부서 텀블러 퍼센트
 
     @Column(name = "tumbler_grade", nullable = false)
-    private String tumblerGrade; // 월별 부서 텀블러 등급
+    private Integer tumblerGrade; // 월별 부서 텀블러 등급
+
+    @Column(name = "tumbler_count", nullable = false)
+    private Integer tumblerCount; // 월별 부서 텀블러 적립 수
+
+    @Builder
+    public TumblerHistory(Long id, Department department, LocalDateTime createdAt, String tumblerName, Double tumblerPercent, Integer tumblerGrade, Integer tumblerCount) {
+        this.id = id;
+        this.department = department;
+        this.createdAt = createdAt;
+        this.tumblerName = tumblerName;
+        this.tumblerPercent = tumblerPercent;
+        this.tumblerGrade = tumblerGrade;
+        this.tumblerCount = tumblerCount;
+    }
 }
