@@ -7,11 +7,14 @@ import kusitms.server.domain.tumbler.history.util.ListComparatorTumblerHistory;
 import lombok.Builder;
 import lombok.Getter;
 
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Builder
 @Getter
 public class HistoryRankResponseDto {
+
+    private String date;
 
     private Integer rank;
 
@@ -27,8 +30,10 @@ public class HistoryRankResponseDto {
                 rank = i;
             }
         }
+        String date = DateTimeFormatter.ofPattern("yy.MM").format(tumblerHistories.get(rank).getCreatedAt());
 
         return HistoryRankResponseDto.builder()
+                .date(date)
                 .rank(rank + 1)
                 .tumblerCount(tumblerHistories.get(rank).getTumblerCount())
                 .build();

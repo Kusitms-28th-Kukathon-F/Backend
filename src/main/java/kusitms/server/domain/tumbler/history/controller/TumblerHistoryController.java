@@ -1,6 +1,7 @@
 package kusitms.server.domain.tumbler.history.controller;
 
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import kusitms.server.domain.common.dto.SuccessResponse;
 import kusitms.server.domain.common.dto.code.SuccessCode;
 import kusitms.server.domain.tumbler.history.dto.response.HistoryBoardGraphResponseDto;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Tag(name = "부서 텀블러 랭킹 API", description = "부서 텀블러 랭킹 내역 상세 조회 API")
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/tumblers/history")
