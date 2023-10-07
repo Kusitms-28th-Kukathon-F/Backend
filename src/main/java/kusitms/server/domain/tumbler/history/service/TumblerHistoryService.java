@@ -81,7 +81,6 @@ public class TumblerHistoryService {
         User finduser = getUserById(userId);
         Department userDepartment = getDepartmentByUser(finduser);
         Company company = userDepartment.getCompany();
-        List<Department> departments = company.getDepartments();
         List<HistoryRankResponseDto> response = new ArrayList<>();
         LocalDateTime startMonthDate = createStartMonthDate(period);
         LocalDateTime endMonthDate = createEndMonthDate(period);
