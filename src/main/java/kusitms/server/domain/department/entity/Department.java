@@ -29,7 +29,7 @@ public class Department {
     @JoinColumn(name = "user_id")
     private User user; // 유저 id
 
-    @OneToOne(fetch = LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "company_id")
     private Company company; // 회사 id
 
