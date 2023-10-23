@@ -1,5 +1,6 @@
 # Backend
-## 큐시즘 28기 해커톤 F팀
+## 큐시즘 28기 해커톤 F팀 "텀블러 키우기(텀블리)"
+![landing9](https://github.com/Kusitms-28th-Kukathon-F/Frontend/assets/97966640/be660925-d517-4ffa-9bad-5a72bb18478c)
 
 <br>
 
@@ -14,6 +15,11 @@
 | 개발 | [안재국](https://github.com/jk6722) | 📱 Web 화면 UI 구현, 서버 연동 |
 | 개발 | [오진영](https://github.com/OJOJIN) | 💻 DB 및 API 구축 |
 | 개발 | [한호정](https://github.com/hojeong2747) | 🖥️ DB 및 API 구축, 서버 배포 |
+
+<br>
+
+## 📺 시연 영상
+https://github.com/Kusitms-28th-Kukathon-F/Frontend/assets/97966640/fe76862b-96ac-4efe-802a-069b98c68c1b
 
 <br>
 
@@ -59,9 +65,9 @@
 
 ### 📕 커밋 컨벤션
 
-커밋 메세지는 <b>[이슈번호, 기능 키워드, 커밋 내용]</b>으로 작성할 것!
+커밋 메세지는 <b>[기능 키워드, 커밋 내용]</b>으로 작성할 것!
 
-ex) `git commit -m "#8 feat : 앱 설치 플로팅 배너 추가 `
+ex) `git commit -m "feat: 분기별 랭킹 화면 추가`
 
 - `feat` : 새로운 기능 추가
 - `fix` : 버그 수정
@@ -84,28 +90,9 @@ ex) `git commit -m "#8 feat : 앱 설치 플로팅 배너 추가 `
   - `Tag`를 이용하여 배포 버전 명시
 - `develop` : 다음 버전을 개발하는 브랜치
 - `feat` : 기능을 개발하는 브랜치
-  - `feat/이슈번호`로 네이밍 할 것
+  - `feat/개발할 기능`으로 네이밍 할 것
   - main 또는 develop으로 merge할 때는 `--no-ff` 반드시 사용할 것
 - `hotfix` : 출시 버전에서 발생한 버그를 수정하는 브랜치
-
-<br>
-
-### 📒 Issue 템플릿 및 라벨
-
-#### 이슈 템플릿 : 이슈 생성시 목적에 맞는 템플릿을 사용합니다 (추가 예정)
-
-![이슈 템플릿 이미지](./.github/image.png)
-
-#### 이슈 라벨 : 이슈를 분류할 때 라벨을 추가합니다:
-
-- `🛠feat` : 기능 개발을 할 때는 이 라벨을 사용합니다.
-- `🔨bug` : 버그를 수정할 때는 이 라벨을 사용합니다.
-- `📃docs` : 문서 작업이 필요할 때는 이 라벨을 사용합니다.
-- `✅test` : 테스트 관련 이슈는 이 라벨을 사용합니다.
-- `⚙chore` : 설정 또는 패키지 매니징에는 이 라벨을 사용합니다.
-- `♻refactor` : 리팩터링이 필요할 때는 이 라벨을 사용합니다.
-
-<br>
 
 
 ### 📘 작업 방식 - 회의
